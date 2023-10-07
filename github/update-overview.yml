@@ -1,1 +1,34 @@
+name: Update Profile Overview
 
+on:
+  push:
+    branches:
+      - main  # Change this to the name of your default branch if it's different
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build HTML from Markdown
+        run: npm run build  # You'll need to define this build command in your repository's package.json file
+
+      - name: Update Profile Overview
+        run: |
+          cat your-markdown-file.md > README.md
+          git add README.md
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git commit -m "Update README.md"
+          git push
