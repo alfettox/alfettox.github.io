@@ -26,7 +26,7 @@ jobs:
 
       - name: Update Profile Overview
         run: |
-          cat your-markdown-file.md > README.md
+          cat readme.md > README.md
           git add README.md
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
